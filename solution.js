@@ -56,12 +56,18 @@ class Stack {
   }
 
   sort() {
-    let current = this.top;
-    while (current) {
-      let min = this.findMin(current);
-      let tmp = current.data;
-      current.data = min;
-      current = current.next;
+    let node = this.top;
+    while (node) {
+      let tempMin = node;
+      let nextItem = node.next;
+      while (nextItem) {
+        if (nextItem.data < tempMin.data) {
+          tempMin = nextItem;
+        }
+        nextItem = nextItem.next;
+      }
+      [node.data, tempMin.data] = [tempMin.data, node.data];
+      node = node.next;
     }
   }
 }
